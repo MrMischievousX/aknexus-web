@@ -27,7 +27,7 @@ npm run lint
 
 ## Deploy
 
-Every push to `main` builds and deploys to GitHub Pages (`.github/workflows/deploy.yml`). To post the contact form to
+Every push to `main` builds and deploys to GitHub Pages at aknexus.org (`.github/workflows/deploy.yml`). To post the contact form to
 an endpoint, set the `VITE_FORM_ENDPOINT` repository variable.
 
 ## Edit the content

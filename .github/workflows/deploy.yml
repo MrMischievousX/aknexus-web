@@ -24,8 +24,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Pages serves the site from /<repo>/, not the domain root.
-      - run: npm run build -- --base=/${{ github.event.repository.name }}/
+      - run: npm run build
         env:
           VITE_FORM_ENDPOINT: ${{ vars.VITE_FORM_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
