@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>AKNEXUS · Software, built to run</title>
+    <meta name="description" content="AKNEXUS Technologies designs, builds and runs web, mobile and cloud products for businesses, from the first sketch to every release after launch." />
+    <meta name="theme-color" content="#121212" />
+    <script>
+      // Set the theme before first paint so the page never flashes the wrong one.
+      ;(() => {
+        let theme
+        try { theme = localStorage.getItem('aknexus-theme') } catch {}
+        if (theme !== 'light' && theme !== 'dark') theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        document.documentElement.dataset.theme = theme
+        document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f6f6f3' : '#121212'
+      })()
+    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AKNEXUS · Software, built to run" />
+    <meta property="og:description" content="Web, mobile and cloud products for businesses, designed, built and run by one team." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #121212;
+  --color-surface: #1b1b1b;
+  --color-raise: #242424;
+  --color-line: #2a2a2a;
+  --color-text: #f4f4f2;
+  --color-soft: #b5b5b2;
+  --color-muted: #858582;
+  --color-dim: #575755;
+  --color-accent: #ff6b35;
+  --color-accent-deep: #f2561c;
+  --color-navy: #0f1b2d;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Inter Tight Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+/* @theme holds the dark tokens; the script in index.html always sets data-theme before first paint. */
+:root[data-theme="light"] {
+  --color-bg: #f6f6f3;
+  --color-surface: #ededea;
+  --color-raise: #e3e3df;
+  --color-line: #dcdcd7;
+  --color-text: #141414;
+  --color-soft: #4a4a47;
+  --color-muted: #6a6a66;
+  --color-dim: #9a9a96;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-text);
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-navy);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Keeps the hero copy readable over the 3D scene, in the page colour of either theme. */
+.hero-scrim {
+  background: radial-gradient(ellipse at 15% 55%, color-mix(in srgb, var(--color-bg) 92%, transparent) 0%, color-mix(in srgb, var(--color-bg) 55%, transparent) 40%, transparent 72%);
+}
+@media (min-width: 64rem) {
+  .hero-scrim {
+    background: radial-gradient(ellipse at 8% 55%, color-mix(in srgb, var(--color-bg) 85%, transparent) 0%, color-mix(in srgb, var(--color-bg) 35%, transparent) 30%, transparent 55%);
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+/* Film grain over the whole page; static, so it costs nothing per frame. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Project mockups: drawn in HTML so they scale with the card and stay sharp. */
+.mock { background: #fff; border: 1.5px solid var(--color-navy); color: var(--color-navy); }
+.m-line { display: block; height: 0.55em; border-radius: 1em; background: #e1e6ee; }
+.m-small { font-size: 0.85em; }
+
+.m-phone { height: 84%; aspect-ratio: 9 / 17; border-radius: 1.6em; padding: 1.1em 0.9em; display: flex; flex-direction: column; gap: 0.75em; }
+.m-top { display: flex; align-items: center; gap: 0.6em; }
+.m-dot { width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--color-navy); flex: none; }
+.m-card { background: var(--color-navy); color: #fff; border-radius: 0.8em; padding: 0.8em; display: flex; flex-direction: column; gap: 0.35em; }
+.m-card .m-small { color: #c3ccda; }
+.m-card b { font-size: 1.3em; white-space: nowrap; }
+.m-row { display: flex; align-items: center; gap: 0.6em; }
+.m-avatar { width: 1.8em; height: 1.8em; border-radius: 0.5em; background: #f1f4f8; border: 1px solid #e1e6ee; flex: none; }
+.m-btn { margin-top: auto; background: var(--color-accent); color: var(--color-navy); border-radius: 0.6em; padding: 0.7em; text-align: center; font-weight: 600; }
+.m-toast {
+  position: absolute; left: 60%; top: 20%; display: flex; align-items: center; gap: 0.5em;
+  background: #fff; color: var(--color-navy); border: 1.5px solid var(--color-navy); border-radius: 0.7em; padding: 0.6em 0.85em; font-weight: 600; white-space: nowrap;
+}
+.m-toast::before { content: ""; width: 0.7em; height: 0.7em; border-radius: 50%; background: var(--color-accent); flex: none; }
+
+.m-browser { width: 86%; border-radius: 0.8em; overflow: hidden; }
+.m-bar { display: flex; gap: 0.4em; padding: 0.6em 0.8em; border-bottom: 1.5px solid var(--color-navy); }
+.m-bar i { width: 0.65em; height: 0.65em; border-radius: 50%; background: #e1e6ee; }
+.m-body { display: grid; grid-template-columns: 22% minmax(0, 1fr); }
+.m-side { background: var(--color-navy); padding: 1em 0.8em; display: flex; flex-direction: column; gap: 0.9em; }
+.m-side .m-line { background: #263752; }
+.m-main { padding: 1em; display: flex; flex-direction: column; gap: 1em; min-width: 0; }
+.m-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6em; }
+.m-kpis div { border: 1px solid #e1e6ee; border-radius: 0.6em; padding: 0.6em; display: flex; flex-direction: column; gap: 0.2em; min-width: 0; }
+.m-kpis .m-small { color: #536079; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.m-kpis b { font-size: 1.4em; }
+.m-chart { display: flex; align-items: flex-end; gap: 3%; height: 7em; border-bottom: 1px solid #e1e6ee; }
+.m-chart span { flex: 1; background: var(--color-navy); border-radius: 0.25em 0.25em 0 0; }
+.m-chart span.hi { background: var(--color-accent); }
+
+.m-chat { width: 74%; border-radius: 0.9em; padding: 1.1em; display: flex; flex-direction: column; gap: 0.7em; }
+.m-msg { max-width: 80%; padding: 0.6em 0.85em; border-radius: 0.9em; }
+.m-msg.them { align-self: flex-end; background: var(--color-navy); color: #fff; border-bottom-right-radius: 0.2em; }
+.m-msg.us { align-self: flex-start; background: #f1f4f8; border-bottom-left-radius: 0.2em; }
+.m-src { display: flex; align-items: center; gap: 0.4em; margin-top: 0.4em; font-size: 0.85em; font-weight: 600; color: #536079; }
+.m-src::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 2px; background: var(--color-accent); flex: none; }
+
+.m-term { width: 82%; border-radius: 0.8em; overflow: hidden; background: var(--color-navy); color: #fff; }
+.m-term .m-bar { border-bottom-color: #263752; }
+.m-term .m-bar i { background: #263752; }
+.m-tbody { padding: 1.1em 1.3em; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; display: flex; flex-direction: column; gap: 0.6em; }
+.m-tbody p { display: flex; align-items: baseline; gap: 0.8em; margin: 0; }
+.m-tbody em { margin-left: auto; font-style: normal; color: #c3ccda; }
+.m-tbody .run { color: var(--color-accent); }
