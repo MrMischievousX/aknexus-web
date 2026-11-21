@@ -79,7 +79,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           Open for new projects
         </motion.p>
 
-        <h1 className="max-w-[11ch] font-display text-[clamp(3.4rem,10vw,9.5rem)] font-semibold leading-[0.9] tracking-[-0.05em]">
+        <h1 className="max-w-[11ch] font-display text-[clamp(3.2rem,9vw,8.5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
           <Words text="Software," play={ready} /> <Words text="built to run." play={ready} delay={0.12} />
         </h1>
 
