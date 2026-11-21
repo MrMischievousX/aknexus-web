@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react'
 import { Reveal, SectionHeading } from './Words'
 
 export function About() {
@@ -18,9 +19,15 @@ export function About() {
               <div>
                 <p className="text-lg font-semibold">Akash Tureha</p>
                 <p className="text-muted">Founder, AKNEXUS Technologies</p>
-                <p className="mt-2 border-b border-dashed border-muted text-sm text-soft">
-                  Two or three sentences about you go here.
-                </p>
+                <a
+                  href="https://www.linkedin.com/in/akash-tureha/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group mt-2 inline-flex items-center gap-1 text-sm text-soft transition-colors hover:text-text"
+                >
+                  LinkedIn
+                  <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
               </div>
             </div>
           </Reveal>
