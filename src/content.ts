@@ -94,6 +94,8 @@ export type Project = {
   url?: string
   /** Short note shown next to the sector, e.g. when a site is no longer up. */
   status?: string
+  /** Extra places the work can be seen, such as the app stores. */
+  links?: { label: string; href: string }[]
 }
 
 export const projects: Project[] = [
@@ -119,6 +121,10 @@ export const projects: Project[] = [
     real: true,
     shot: '/projects/sufra.webp',
     url: 'https://www.sufra.sa',
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/sa/app/sufra-food-delivery-rewards/id6471874736' },
+      { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.sufra.app' },
+    ],
   },
   {
     id: 'clothe',
@@ -163,78 +169,6 @@ export const projects: Project[] = [
     real: true,
     shot: '/projects/bloomsight.webp',
     status: 'Site no longer live',
-  },
-  {
-    id: 'clinic',
-    name: 'Clinic app.',
-    title: 'Booking, reminders and payments for a busy clinic.',
-    sector: 'Healthcare',
-    summary: 'An Android and iOS app where patients book and pay, reminders that cut missed visits, and a dashboard for the front desk.',
-    need: 'Patients book by phone, the front desk juggles a paper diary, and missed appointments go unnoticed.',
-    build: [
-      'An Android and iOS app for booking, rescheduling and paying',
-      'Automatic SMS and WhatsApp reminders before each visit',
-      'A web dashboard for the front desk to run the day',
-      'Payments and receipts, reconciled every day',
-    ],
-    stack: ['Kotlin', 'Swift', 'Node.js', 'PostgreSQL', 'AWS'],
-    color: '#A8DCCD',
-    mockup: 'phone',
-    services: ['mobile', 'backend', 'cloud'],
-  },
-  {
-    id: 'retail',
-    name: 'Retail dashboard.',
-    title: 'Every order and stock level in one place.',
-    sector: 'Retail',
-    summary: 'Orders from the website, WhatsApp and the shop counter in one dashboard, with live stock and a daily sales report.',
-    need: 'Orders arrive from the website, WhatsApp and the shop counter, and stock counts never match.',
-    build: [
-      'One dashboard for every order, whatever the channel',
-      'Live stock levels with low-stock alerts',
-      'A daily sales report by email',
-      'Roles for owners, managers and counter staff',
-    ],
-    stack: ['Next.js', 'NestJS', 'PostgreSQL', 'Google Cloud'],
-    color: '#F4C09A',
-    mockup: 'browser',
-    services: ['web', 'backend', 'cloud'],
-  },
-  {
-    id: 'assistant',
-    name: 'AI assistant.',
-    title: 'Support answers from your own help articles.',
-    sector: 'Software company',
-    summary: 'An assistant that answers customers from your help articles, shows its sources and hands over to a person when unsure.',
-    need: 'The support team answers the same questions all day, and replies slow down as customers grow.',
-    build: [
-      'An assistant that answers from your help articles',
-      'A source link under every answer',
-      'Hand-over to a person when it is not sure',
-      'A list of unanswered questions, to improve your docs',
-    ],
-    stack: ['LLM API', 'Retrieval (RAG)', 'Python', 'AWS'],
-    color: '#C7BAF2',
-    mockup: 'chat',
-    services: ['ai', 'backend'],
-  },
-  {
-    id: 'cloud',
-    name: 'Cloud move.',
-    title: 'From one hand-run server to automatic releases.',
-    sector: 'Any growing product',
-    summary: 'Infrastructure written as code, pipelines that test and deploy every change, and monitoring before customers notice.',
-    need: 'The app runs on one server, every release is done by hand, and outages are noticed only when customers complain.',
-    build: [
-      'An AWS setup written in Terraform, rebuildable from scratch',
-      'Pipelines that test and deploy every change',
-      'One-step rollback when a release misbehaves',
-      'Monitoring and alerts that reach the right person',
-    ],
-    stack: ['Terraform', 'Docker', 'GitHub Actions', 'AWS', 'Grafana'],
-    color: '#FF6B35',
-    mockup: 'terminal',
-    services: ['cloud', 'support'],
   },
 ]
 

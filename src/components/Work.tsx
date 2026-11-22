@@ -110,17 +110,21 @@ function ProjectRow({ project, index, onOpen }: { project: Project; index: numbe
               {project.real ? 'See what we built' : "See how we'd build it"}
               <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </button>
-            {project.url ? (
+            {[
+              ...(project.url ? [{ label: 'Visit the site', href: project.url }] : []),
+              ...(project.links ?? []),
+            ].map((link) => (
               <a
-                href={project.url}
+                key={link.href}
+                href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="group inline-flex items-center gap-2 border-b border-transparent pb-1 text-sm text-soft transition-colors hover:border-line hover:text-text"
               >
-                Visit the site
+                {link.label}
                 <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
-            ) : null}
+            ))}
           </div>
         </Reveal>
       </div>
@@ -135,10 +139,9 @@ export function Work({ onOpen }: { onOpen: (id: string) => void }) {
   return (
     <section id="work" className="py-28 sm:py-36">
       <div className="container-x grid gap-8 lg:grid-cols-2 lg:items-end">
-        <SectionHeading lead="Selected work." title="What we have shipped, and what we take on." />
+        <SectionHeading lead="Selected work." title="Products we have built and run." />
         <Reveal className="max-w-lg text-lg text-soft lg:justify-self-end">
-          Products we have built and run, followed by examples of the work we take on. Tell us about yours and we'll send you a
-          plan.
+          A few of the things we have designed, built and shipped. Tell us about yours and we'll send you a plan.
         </Reveal>
       </div>
       <div className="container-x mt-20 flex flex-col gap-28 sm:gap-36">

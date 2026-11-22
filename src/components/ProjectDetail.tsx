@@ -150,6 +150,11 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
                       Visit the site <ArrowUpRight size={18} />
                     </MagneticButton>
                   ) : null}
+                  {project.links?.map((link) => (
+                    <MagneticButton key={link.href} variant="ghost" href={link.href}>
+                      {link.label} <ArrowUpRight size={18} />
+                    </MagneticButton>
+                  ))}
                   <MagneticButton variant="ghost" onClick={onNext}>
                     Next project
                   </MagneticButton>
