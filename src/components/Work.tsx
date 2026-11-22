@@ -38,10 +38,24 @@ function TiltCard({ project, onOpen }: { project: Project; onOpen: () => void })
         onPointerMove={track}
         onPointerLeave={leave}
         style={{ rotateX, rotateY, backgroundColor: project.color }}
-        aria-label={`View details of the ${project.name.replace(/\.$/, '')} example`}
-        className="relative grid aspect-[16/11] w-full place-items-center overflow-hidden rounded-[28px] text-[clamp(9px,1.05vw,13px)] leading-[1.3] text-navy max-sm:aspect-square max-sm:text-[10px] md:cursor-none"
+        aria-label={`View details of ${project.name.replace(/\.$/, '')}`}
+        className={clsx(
+          'relative grid w-full place-items-center overflow-hidden rounded-[28px] text-[clamp(9px,1.05vw,13px)] leading-[1.3] text-navy max-sm:text-[10px] md:cursor-none',
+          // Screenshots keep a wide ratio at every width; a square would crop their sides off.
+          project.shot ? 'aspect-[16/9]' : 'aspect-[16/11] max-sm:aspect-square',
+        )}
       >
-        <Mockup kind={project.mockup} />
+        {project.shot ? (
+          <img
+            src={project.shot}
+            alt={`${project.name.replace(/\.$/, '')} website`}
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-top"
+          />
+        ) : (
+          <Mockup kind={project.mockup} />
+        )}
         <motion.span
           aria-hidden
           style={{ x: cursorX, y: cursorY }}
@@ -67,8 +81,9 @@ function ProjectRow({ project, index, onOpen }: { project: Project; index: numbe
     <article ref={ref} className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
       <div className={clsx('flex flex-col gap-6 lg:col-span-5', flipped && 'lg:order-2 lg:col-start-8')}>
         <Reveal className="flex items-center gap-3 text-sm text-muted">
-          <span className="rounded-full bg-raise px-3 py-1 text-soft">Example</span>
+          <span className="rounded-full bg-raise px-3 py-1 text-soft">{project.real ? 'Client work' : 'Example'}</span>
           {project.sector}
+          {project.status ? <span className="text-muted">· {project.status}</span> : null}
         </Reveal>
         <Reveal delay={0.05}>
           <h3 className="font-display text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1.08]">
@@ -86,14 +101,27 @@ function ProjectRow({ project, index, onOpen }: { project: Project; index: numbe
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            onClick={() => onOpen(project.id)}
-            className="group inline-flex items-center gap-2 self-start border-b border-line pb-1 text-sm font-medium transition-colors hover:border-text"
-          >
-            See how we'd build it
-            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </button>
+          <div className="flex flex-wrap items-center gap-6">
+            <button
+              type="button"
+              onClick={() => onOpen(project.id)}
+              className="group inline-flex items-center gap-2 border-b border-line pb-1 text-sm font-medium transition-colors hover:border-text"
+            >
+              {project.real ? 'See what we built' : "See how we'd build it"}
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </button>
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="group inline-flex items-center gap-2 border-b border-transparent pb-1 text-sm text-soft transition-colors hover:border-line hover:text-text"
+              >
+                Visit the site
+                <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            ) : null}
+          </div>
         </Reveal>
       </div>
       <motion.div style={{ scale, rotate }} className={clsx('lg:col-span-7', flipped && 'lg:order-1 lg:col-start-1')}>
@@ -107,9 +135,9 @@ export function Work({ onOpen }: { onOpen: (id: string) => void }) {
   return (
     <section id="work" className="py-28 sm:py-36">
       <div className="container-x grid gap-8 lg:grid-cols-2 lg:items-end">
-        <SectionHeading lead="Example projects." title="The kind of work we take on." />
+        <SectionHeading lead="Selected work." title="What we have shipped, and what we take on." />
         <Reveal className="max-w-lg text-lg text-soft lg:justify-self-end">
-          Each one shows what we'd build for a typical client and the tools we'd use. Tell us about yours and we'll send you a
+          Products we have built and run, followed by examples of the work we take on. Tell us about yours and we'll send you a
           plan.
         </Reveal>
       </div>

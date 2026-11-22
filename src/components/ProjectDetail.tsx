@@ -1,4 +1,4 @@
-import { ArrowRight, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useRef, type MouseEvent } from 'react'
 import { steps, type Project } from '../content'
@@ -66,8 +66,11 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
             >
               <div className="flex items-start justify-between gap-6">
                 <p className="flex items-center gap-3 text-sm text-muted">
-                  <span className="rounded-full bg-raise px-3 py-1 text-soft">Example project</span>
+                  <span className="rounded-full bg-raise px-3 py-1 text-soft">
+                    {project.real ? 'Client work' : 'Example project'}
+                  </span>
                   {project.sector}
+                  {project.status ? <span className="text-muted">· {project.status}</span> : null}
                 </p>
                 <button
                   ref={closeRef}
@@ -87,10 +90,19 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
               </h2>
 
               <div
-                className="mt-10 grid aspect-[16/9] place-items-center overflow-hidden rounded-[24px] text-[clamp(10px,1.2vw,15px)] leading-[1.3] text-navy max-sm:aspect-square"
+                className={`mt-10 grid aspect-[16/9] place-items-center overflow-hidden rounded-[24px] text-[clamp(10px,1.2vw,15px)] leading-[1.3] text-navy ${project.shot ? '' : 'max-sm:aspect-square'}`}
                 style={{ backgroundColor: project.color }}
               >
-                <Mockup kind={project.mockup} />
+                {project.shot ? (
+                  <img
+                    src={project.shot}
+                    alt={`${project.name.replace(/\.$/, '')} website`}
+                    decoding="async"
+                    className="h-full w-full object-cover object-top"
+                  />
+                ) : (
+                  <Mockup kind={project.mockup} />
+                )}
               </div>
 
               <div className="mt-12 grid gap-12 lg:grid-cols-2">
@@ -99,7 +111,7 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
                   <p className="mt-3 text-xl leading-relaxed">{project.need}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-muted">What we'd build</h3>
+                  <h3 className="text-sm font-medium text-muted">{project.real ? 'What we built' : "What we'd build"}</h3>
                   <ul className="mt-3 flex flex-col gap-3">
                     {project.build.map((item) => (
                       <li key={item} className="flex gap-3 text-lg text-soft">
@@ -112,7 +124,7 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
               </div>
 
               <div className="mt-12 border-t border-line pt-10">
-                <h3 className="text-sm font-medium text-muted">How we'd run it</h3>
+                <h3 className="text-sm font-medium text-muted">{project.real ? 'How we ran it' : "How we'd run it"}</h3>
                 <ol className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                   {steps.map((step, i) => (
                     <li key={step.title} className="rounded-2xl bg-raise p-5">
@@ -133,8 +145,13 @@ export function ProjectDetail({ project, onClose, onDiscuss, onNext }: Props) {
                   ))}
                 </ul>
                 <div className="flex flex-wrap gap-3">
+                  {project.url ? (
+                    <MagneticButton variant="ghost" href={project.url}>
+                      Visit the site <ArrowUpRight size={18} />
+                    </MagneticButton>
+                  ) : null}
                   <MagneticButton variant="ghost" onClick={onNext}>
-                    Next example
+                    Next project
                   </MagneticButton>
                   <MagneticButton onClick={onDiscuss}>
                     Discuss a project like this <ArrowRight size={18} />

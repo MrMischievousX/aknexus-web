@@ -13,7 +13,7 @@ import { Process } from './components/Process'
 import { ProjectDetail } from './components/ProjectDetail'
 import { Services } from './components/Services'
 import { Statement } from './components/Statement'
-// import { Work } from './components/Work'
+import { Work } from './components/Work'
 import { projects } from './content'
 import { IntroContext, PLAY_INTRO } from './lib/intro'
 import { lockScroll, scrollToSection, useSmoothScroll } from './lib/smooth-scroll'
@@ -58,8 +58,7 @@ export default function App() {
           <Statement />
           <Services />
           <Audiences />
-          {/* Example projects hidden for now. */}
-          {/* <Work onOpen={setOpenId} /> */}
+          <Work onOpen={setOpenId} />
           <Process />
           <About />
           <Faq />
