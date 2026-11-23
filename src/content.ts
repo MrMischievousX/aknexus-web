@@ -106,7 +106,7 @@ export const projects: Project[] = [
     sector: 'Hospitality, Saudi Arabia',
     summary:
       'One account across several restaurant brands: delivery and dine-in ordering, points and tiers, catering bookings and gift cards, shared by the website and the iOS and Android apps.',
-    need: 'Each brand in the group ran its own ordering and its own loyalty, so a regular customer earned nothing by eating across the group.',
+    need: 'Several restaurant brands had to sit behind one programme, so that ordering, points and tiers work the same whether a guest eats in, orders delivery or books catering.',
     build: [
       'Delivery and dine-in ordering across every brand in the group',
       'A points and tiers programme that carries across all of them',
@@ -133,7 +133,7 @@ export const projects: Project[] = [
     sector: 'Direct-to-consumer fashion',
     summary:
       'An online store for a streetwear label, with collections, product pages, rupee checkout and a custom-order route that carries the design straight into WhatsApp.',
-    need: 'The label needed a shop of its own, one that could show collections properly, take payment in rupees and handle one-off custom orders.',
+    need: 'A streetwear label needed its collections and colourways shown properly, checkout in rupees in the same place, and a route for one-off custom pieces.',
     build: [
       'A storefront with collections, product pages, sizes and colourways',
       'Cart and checkout, with Razorpay for rupee payments',
@@ -155,14 +155,14 @@ export const projects: Project[] = [
     sector: 'Venture and fintech',
     summary:
       'A platform for finding and backing early-stage Indian startups, with investor sign-up on the web and companion apps shipped to the App Store and Google Play.',
-    need: 'Deal flow was handled over email and spreadsheets, with no single place for investors to sign up, browse startups and follow what they had backed.',
+    need: 'Investors needed one place to find early-stage startups and register to back them, reachable from the web and from a phone.',
     build: [
       'A web platform for browsing startups and registering as an investor',
       'Companion iOS and Android apps, taken through both store reviews',
       'Investor accounts, onboarding and verification',
       'A public site for the fund, its thesis and its portfolio',
     ],
-    stack: ['React Native', 'Expo', 'iOS', 'Android'],
+    stack: ['Web', 'iOS', 'Android'],
     color: '#0E7C86',
     mockup: 'phone',
     services: ['web', 'mobile', 'backend'],
